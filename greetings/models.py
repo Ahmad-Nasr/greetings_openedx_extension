@@ -22,4 +22,4 @@ class Greeting(TimeStampedModel):
         """
         Get a string representation of this model instance.
         """
-        return f"Greetings: {self.greeting}, ID: {self.id}, from: {self.user}>"
+        return f"Greetings: {self.greeting}, ID: {self.id}, from: {self.user}"
