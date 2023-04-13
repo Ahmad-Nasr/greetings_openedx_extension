@@ -1,24 +1,25 @@
 """
-Database models for greetings.
+Database models for greetings application.
 """
-# from django.db import models
+from django.db import models
+from django.contrib.auth import get_user_model
+from django.utils.translation import ugettext_lazy as _
+
 from model_utils.models import TimeStampedModel
+
+User = get_user_model()
 
 
 class Greeting(TimeStampedModel):
     """
-    TODO: replace with a brief description of the model.
-
-    TODO: Add either a negative or a positive PII annotation to the end of this docstring.  For more
-    information, see OEP-30:
-    https://open-edx-proposals.readthedocs.io/en/latest/oep-0030-arch-pii-markup-and-auditing.html
+    Greeting model stores students' greetings
     """
 
-    # TODO: add field definitions
+    greeting = models.CharField(_('Greeting'), max_length=128)
+    user = models.ForeignKey(User, related_name='greetings', on_delete=models.CASCADE)
 
     def __str__(self):
         """
         Get a string representation of this model instance.
         """
-        # TODO: return a string appropriate for the data fields
-        return '<Greeting, ID: {}>'.format(self.id)
+        return f"Greetings: {self.greeting}, ID: {self.id}, from: {self.user}>"
