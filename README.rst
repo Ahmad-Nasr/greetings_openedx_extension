@@ -59,6 +59,11 @@ Every time you develop something in this repo
 
   # Open a PR and ask for review.
 
+Note:
+---------------------------------------------
+Before using ``GreetingAPIClient``, make sure to exec into a running LMS container and execute the management command
+.. code-block::
+python manage.py lms create_greetings_client_app
 
 License
 *******
