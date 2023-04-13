@@ -129,4 +129,11 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
     ],
+    entry_points={
+        "lms.djangoapp": [
+            "greetings = greetings.apps:GreetingsConfig",
+        ],
+        "cms.djangoapp": [
+        ],
+    }
 )
