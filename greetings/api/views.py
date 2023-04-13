@@ -9,6 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 from ..models import Greeting
 from .serializers import GreetingSerializer
+from .api_client import GreetingAPIClient
 
 logger = logging.getLogger(__name__)
 GREETING_SUBMISSION_LOG_MESSAGE = "User '%s' submitted '%s'"
@@ -28,4 +29,8 @@ class GreetingAPIView(GenericAPIView):
         logger.info(GREETING_SUBMISSION_LOG_MESSAGE, request.user, greeting_msg)
         Greeting.objects.create(greeting=greeting_msg, user=request.user)
 
+        if greeting_msg.strip().lower() == "hello":
+            api_client = GreetingAPIClient()
+            success = api_client.submit_greeting("goodbye")
+            return Response(status=status.HTTP_200_OK) if success else Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(status=status.HTTP_200_OK)
